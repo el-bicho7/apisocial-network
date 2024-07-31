@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongoose').Types;
-const { User, Thought } = require('../models');
+const { User } = require('../models');
 
 module.exports = {
   // Get All Users
@@ -47,6 +47,25 @@ module.exports = {
       return res.status(500).json(err);
     }
   },
+  // Update User
+  async updateUser(req, res) {
+    try {
+      const user = await User.findByIdAndUpdate(
+        { _id: req.params.userId },
+        { $set: req.body },
+        { runValidators: true, new: true }
+      )
+
+      if (!user) {
+        res.status(404).json({ message: 'No User with that Id' });
+      }
+
+      res.status(200).json({ message: "User updated!" });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  },
   // Delete User
   async deleteUser(req, res) {
     try {
@@ -84,7 +103,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // Remove thought
+  // Remove friend
   async removeFriend(req, res) {
     try {
       const friendId = req.params.friendId;

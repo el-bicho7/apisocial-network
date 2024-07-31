@@ -4,6 +4,7 @@ const {
   getSingleUser,
   createUser,
   deleteUser,
+  updateUser,
   addFriend, 
   removeFriend,
 } = require('../../controllers/userController');
@@ -14,7 +15,7 @@ router.route('/').get(getUsers).post(createUser);
 
 // /api/users/:userId
 // This route get a single user and can delete the user selected
-router.route('/:userId').get(getSingleUser).delete(deleteUser);
+router.route('/:userId').get(getSingleUser).put(updateUser).delete(deleteUser);
 
 // /api/users/:userId/friends
 // This routes lets add friend on selected user
