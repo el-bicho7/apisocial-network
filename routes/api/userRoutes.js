@@ -14,7 +14,7 @@ const {
 router.route('/').get(getUsers).post(createUser);
 
 // /api/users/:userId
-// This route get a single user and can delete the user selected
+// This route get a single user and can delete and update the user selected
 router.route('/:userId').get(getSingleUser).put(updateUser).delete(deleteUser);
 
 // /api/users/:userId/friends
